@@ -23,6 +23,7 @@ env:
   REPO_BRANCH: master
   BUILD_ROOT: ${{ github.workspace }}/lede
   DEPENDENCIES: ${{ github.workspace }}/dependencies-ubuntu.txt
+  CUSTOM_CONFIG: ${{ github.workspace }}/.config
   CUSTOM_FEEDS_SH: ${{ github.workspace }}/custom-feeds.sh
   CUSTOM_PACKAGES_SH: ${{ github.workspace }}/custom-packages.sh
   CUSTOM_CONFIG_SH: ${{ github.workspace }}/custom-config.sh
@@ -81,6 +82,7 @@ jobs:
         $CUSTOM_FEEDS_SH
         $BUILD_ROOT/scripts/feeds update -a && $BUILD_ROOT/scripts/feeds install -a
         $CUSTOM_PACKAGES_SH
+        cp CUSTOM_CONFIG $BUILD_ROOT/.config
         $CUSTOM_CONFIG_SH
 
     - name: Start SSH via tmate
